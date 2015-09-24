@@ -15,11 +15,7 @@ var inner = outer();
 
 inner();
 
-
-
 //Next problem
-
-
 
 var callFriend = function(){
   var friend = 'Jake';
@@ -32,9 +28,8 @@ var callFriend = function(){
 //Above you're given a callFriend function that returns another function.
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
-console.log(callFriend());
-
-
+var phrase = callFriend();
+console.log(phrase());
 
 //Next Problem
 
@@ -43,10 +38,12 @@ console.log(callFriend());
 /*
   Write a function called makeCounter that makes the following code work properly.
 */
-var counter = 0;
+
 function makeCounter () {
-  counter++;
-  return console.log(counter);
+  var counter = 0;
+  return function() {
+    return ++counter;
+  }
 }
   var count = makeCounter();
   count() // 1
@@ -60,30 +57,33 @@ function makeCounter () {
   Write a function that accepts another function as it's first argument and returns a new function
   (which invokes the original function that was passed in) that can only ever be executed once.
 */
-HELP
-function(anotherFunction {
-  return newFunction() {
-    for (i=0; i < 1; i++){
-      anotherFunction();
-    }
+function except (otherFunc) {
+  return function newFunc() {
+    otherFunc();
   }
 }
+
+function otherFunc() {
+  console.log("Jordan");
+}
+
+except(otherFunc());
 
 //Next Problem
 
 /*
   Now, similar to the last problem, write a function called 'fnCounter' that accepts two parameters. The first parameter will be an anonymous function and the second parameter, 'N', will be a number. Now, in 'fnCounter', allow the anonymous funciton to be invoked 'N' number of times. After it's been invoked 'N' number of times, return 'STOP'.
 */
-HELP
-function fnCounter (a, N) {
+function fnCounter (func, N) {
   for (var i = 0; i < N; i++){
-    a();
+    func();
   }
   return 'STOP';
 }
+
+fnCounter (function() {console.log("jordan")}, 5);
+
 //Next Problem
-
-
 
 /*
   var counter = function(){
@@ -106,15 +106,14 @@ Wrong
 /*
   Fix the counter function so that it works the way you expect it to work. (logging 1 then 2 then 3, etc)
 */
-HELP
-var counter = function(){
-  for (var i=1; i<=5; i++) {
-    setTimeout( function timer(){
-        console.log( i );
-    }, i*1000 );
-  }
-};
-
+  var counter = function(){
+    for (var i=1; i<=5; i++) {
+      var count = 0;
+      setTimeout( function timer(){
+          console.log( ++count );
+      }, i * 1000 );
+    }
+  };
 //Next Problem
 
 /*
@@ -131,5 +130,5 @@ var counter = function(){
   *Hint: Don't let this fool you. Break down what's really happening here.
 */
 
- var funcArray = [function(){console.log(0), function(){console.log(1)}, function(){console.log(2)}, function(){console.log(3)}, function(){console.log(4)}, function(){console.log(5)}]
+ var funcArray = [function(){console.log(0)}, function(){console.log(1)}, function(){console.log(2)}, function(){console.log(3)}, function(){console.log(4)}, function(){console.log(5)}]
 

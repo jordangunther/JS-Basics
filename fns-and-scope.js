@@ -66,6 +66,10 @@ NaN
 undefined
 
 if (myvariable) {
+	console.log('truthy');
+}
+else {
+	console.log('falsy');
 }
 
 
@@ -90,7 +94,7 @@ alert(newMyName);
 
 
 //Create a function called outerFn which returns an anonymous function which returns your name.
-HELP
+
 function outerFn () {
   return function() {
   	return "Jordan"
